@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="NewHier.Views.UnderTeachers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NewHier.Views" xmlns:ViewModel="clr-namespace:NewHier.View_Models"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <ViewModel:VM_UnderTeachers/>
+    </UserControl.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView Name="LVStudents" ItemsSource="{Binding Students}" DisplayMemberPath="Name" SelectionChanged="LVStudents_SelectionChanged" Grid.Row="0" Grid.ColumnSpan="3" >
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Width="auto" Header="Students of Teacher"  DisplayMemberBinding="{Binding Name}"  />
+                        <GridViewColumn Width="auto" Header="Id"  DisplayMemberBinding="{Binding Id}" />
+                        <GridViewColumn Width="auto" Header="average Grade"  DisplayMemberBinding="{Binding Grade}" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ComboBox Grid.Column="0" Grid.Row="2" ItemsSource= "{Binding Courses}" SelectedItem="{Binding SelectedCourse}" Margin="20">
+        </ComboBox>
+        <Button Grid.Column="1" Grid.Row="2" Margin="20" Content="Add Course" FontSize="16" Command="{Binding AddCourseCommand}"></Button>
+    </Grid>
+</UserControl>
